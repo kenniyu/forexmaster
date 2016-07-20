@@ -50,7 +50,7 @@ class Trade < ActiveRecord::Base
 
   def self.open_positions
     # group trades by pair, get most recent one
-    all_trades = Trade.all.group(:pair).order(created_at: :desc).where(status: 0)
+    all_trades = Trade.all.group(:id, :pair).order(created_at: :desc).where(status: 0)
     trades_result = []
     all_trades.each do |trade|
       # calculate cost bases
