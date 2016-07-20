@@ -55,7 +55,8 @@ class Trade < ActiveRecord::Base
       formatted_trades << {
         pair: trade.pair,
         size: trade.size,
-        mark: "%0.5f" % trade.mark.to_f
+        mark: "%0.5f" % trade.mark.to_f,
+        date: trade.created_at
       }
     end
     return formatted_trades
