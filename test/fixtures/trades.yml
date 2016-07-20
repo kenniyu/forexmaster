@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pair: MyString
+  status: 1
+  size: 1
+  mark: 9.99
+
+two:
+  pair: MyString
+  status: 1
+  size: 1
+  mark: 9.99

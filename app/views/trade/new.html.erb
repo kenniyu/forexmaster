@@ -1,0 +1,14 @@
+<%= form_for @trade do |f| %>
+  <div class="form-group">
+    <%= f.label :pair, class: 'sr-only' %>
+    <%= f.text_field :pair, class: 'form-control', placeholder: "Pair, eg: eur/aud" %>
+
+    <%= f.label :size, class: 'sr-only' %>
+    <%= f.text_field :size, class: 'form-control', placeholder: "Size, eg: -2000" %>
+
+    <%= f.label :mark, class: 'sr-only' %>
+    <%= f.text_field :mark, class: 'form-control', placeholder: "Mark, eg: 1.1090" %>
+  </div>
+
+  <%= f.submit "Place Trade", class: 'btn btn-default pull-right' %>
+<% end %>

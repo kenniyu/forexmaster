@@ -1,0 +1,37 @@
+// Place all the styles related to the Trade controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  .form-group {
+    width: 100%;
+
+    label {
+      display: block;
+      padding: 5px 0;
+    }
+  }
+
+  font-family: "HelveticaNeue-Light", Helvetica;
+  font-size: 14px;
+
+  input {
+    padding: 5px;
+    font-size: 12px;
+    display: block;
+    margin-bottom: 20px;
+
+    &[type=submit] {
+      font-family: "HelveticaNeue-Light", Helvetica;
+      border: 1px solid #ccc;
+      padding: 10px;
+      background: white;
+      border-radius: 2px;
+
+      &:hover {
+        background: #eee;
+        cursor: pointer;
+      }
+    }
+  }
+}
