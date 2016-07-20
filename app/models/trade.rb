@@ -48,6 +48,19 @@ class Trade < ActiveRecord::Base
         mark: mark)
   end
 
+  def self.history
+    trades = Trade.all.order(created_at: :desc)
+    formatted_trades = []
+    trades.each do |trade|
+      formatted_trades << {
+        pair: trade.pair,
+        size: trade.size,
+        mark: "%0.5f" % trade.mark.to_f
+      }
+    end
+    return formatted_trades
+  end
+
   def self.open_positions
     # group trades by pair, get most recent one
     all_trades = Trade.all.group(:id, :pair).order(created_at: :desc).where(status: 0)
@@ -62,7 +75,7 @@ class Trade < ActiveRecord::Base
         trades_result << {
           pair: trade.pair,
           size: total_size,
-          cost_basis: cost_basis.to_f
+          cost_basis: "%0.5f" % cost_basis.to_f
         }
       end
     end
@@ -99,6 +112,6 @@ class Trade < ActiveRecord::Base
     cost_basis = sum/total_size
 
     # cost_basis = sum/factor/1000
-    return "%.04f" % cost_basis.abs
+    return cost_basis.abs
   end
 end

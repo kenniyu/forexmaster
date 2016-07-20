@@ -26,6 +26,11 @@ class TradesController < ApplicationController
   end
 
   def history
+    @trades = Trade.history
+    respond_to do |format|
+      format.html
+      format.json { render json: @trades }
+    end
   end
 
   private

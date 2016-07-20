@@ -1,0 +1,5 @@
+<% @trades.each do |trade| %>
+<p>
+  <%= trade[:size] %> <%= trade[:pair] %> @<%= trade[:mark] %>
+</p>
+<% end %>
