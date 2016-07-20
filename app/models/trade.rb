@@ -52,12 +52,14 @@ class Trade < ActiveRecord::Base
     trades = Trade.all.order(created_at: :desc)
     formatted_trades = []
     trades.each do |trade|
-      formatted_trades << {
+      current_trade = {
         pair: trade.pair,
         size: trade.size,
         mark: "%0.5f" % trade.mark.to_f,
-        date: trade.created_at
+        date: trade.created_at.to_time.to_i
       }
+      puts current_trade
+      formatted_trades << current_trade
     end
     return formatted_trades
   end
