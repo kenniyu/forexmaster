@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   post 'register_token/:token' => 'push_token#register_token', as: :register_token
   post 'clear_badge_count/:token' => 'push_token#clear_badge_count', as: :clear_badge_count
 
+  resources :admin
+
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 

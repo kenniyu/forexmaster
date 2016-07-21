@@ -60,10 +60,4 @@ class TradesController < ApplicationController
     end
   end
 
-  private
-  def authenticate
-    authenticate_or_request_with_http_basic("Administration") do |user,pass|
-      user == ENV["USERNAME"] && pass = ENV["PASSWORD"]
-    end
-  end
 end

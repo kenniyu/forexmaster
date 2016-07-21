@@ -1,0 +1,20 @@
+<div class="admin-container">
+<table>
+  <thead>
+  <tr>
+    <td>Device ID</td>
+    <td>Badge Count</td>
+    <td>Last Active</td>
+  </tr>
+</thead>
+
+  <% @push_tokens.each do |push_token| %>
+  <tr>
+    <td><%= push_token.token %></td>
+    <td><%= push_token.badge %></td>
+    <td><%= time_ago_in_words(push_token.updated_at) %> ago</td>
+  </tr>
+  <% end %>
+
+</table>
+</div>
