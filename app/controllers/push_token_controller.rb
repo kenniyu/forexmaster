@@ -13,4 +13,17 @@ class PushTokenController < ApplicationController
       format.json { render json: @success }
     end
   end
+
+  def clear_badge_count
+    token = params[:token]
+    push_token = PushToken.where(token: token).first
+    push_token.badge = 0
+
+    @success = push_token.save
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @success }
+    end
+  end
 end

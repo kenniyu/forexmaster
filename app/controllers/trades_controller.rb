@@ -32,9 +32,16 @@ class TradesController < ApplicationController
 
       push_tokens = PushToken.all
       push_tokens.each do |push_token|
+        new_badge_count = (push_token.badge || 0) + 1
+
+        # save new badge number
+        push_token.badge += 1
+        push_token.save
+
         notification = Houston::Notification.new(device: push_token.token)
         notification.alert = "New trade available!"
         notification.sound = "default"
+        notification.badge = new_badge_count
         notification.content_available = true
         apn.push(notification)
       end

@@ -11,12 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160721004150) do
+ActiveRecord::Schema.define(version: 20160721153951) do
 
   create_table "push_tokens", force: :cascade do |t|
     t.string   "token"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "badge",      default: 0
   end
 
   create_table "rails_push_notifications_apns_apps", force: :cascade do |t|
