@@ -1,3 +1,5 @@
+require 'houston'
+
 class TradesController < ApplicationController
   before_filter :authenticate, only: [:new, :create]
 
@@ -19,6 +21,24 @@ class TradesController < ApplicationController
     pair = params[:trade][:pair]
     trade = Trade.create_trade(pair, size, mark)
     if trade
+      apn = Houston::Client.development
+      file = File.join(Rails.root, "pems/dev_push.pem")
+      if Rails.env.production?
+        apn = Houston::Client.production
+        file = File.join(Rails.root, "pems/prod_push.pem")
+      end
+
+      apn.certificate = File.read(file)
+
+      push_tokens = PushToken.all
+      push_tokens.each do |push_token|
+        notification = Houston::Notification.new(device: push_token.token)
+        notification.alert = "New trade available!"
+        notification.sound = "default"
+        notification.content_available = true
+        apn.push(notification)
+      end
+
       redirect_to action: "index" and return
     else
       redirect_to action: "new" and return

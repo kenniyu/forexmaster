@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'trades_history' => 'trades#history', as: :history
   resources :trades
 
+  post 'register_token/:token' => 'push_token#register_token', as: :register_token
+
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
