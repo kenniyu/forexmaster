@@ -2,7 +2,6 @@ class PushTokenController < ApplicationController
   skip_before_filter  :verify_authenticity_token
 
   def register_token
-    puts token
     token = params[:token]
     return if token.nil?
 
