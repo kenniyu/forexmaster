@@ -15,6 +15,30 @@ class TradesController < ApplicationController
     @trade = Trade.new
   end
 
+  def performance
+    from_date = params[:from_date]
+    to_date = params[:to_date]
+
+    if !from_date
+      from_date = Date.strptime('01-01-2016', '%m-%d-%Y')
+    else
+      from_date = Date.strptime(from_date, '%m-%d-%Y')
+    end
+
+    if !to_date
+      to_date = Date.tomorrow
+    else
+      to_date = Date.strptime(from_date, '%m-%d-%Y') + 1
+    end
+
+    @trade_hash = Trade.pnl(from_date, to_date)
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @trade_hash }
+    end
+  end
+
   def create
     size = params[:trade][:size]
     mark = params[:trade][:mark]

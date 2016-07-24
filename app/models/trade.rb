@@ -64,6 +64,38 @@ class Trade < ActiveRecord::Base
     return formatted_trades
   end
 
+  def self.pnl(from_date = Date.new(2016,1,1), to_date = Date.tomorrow)
+    trades = Trade.where("created_at >= ? AND created_at < ?", from_date, to_date).order(created_at: :asc)
+    trades_bucket = Hash.new(0)
+    date_with_profits = []
+
+    initial_profit = 0
+    initial_date = Trade.first.created_at.to_time.to_i
+    initial_trade = {
+      "date": initial_date,
+      "profit": initial_profit
+    }
+
+    trades.each do |trade|
+      trades_bucket[trade.pair] += (trade.size * trade.mark.to_f)
+      if trade.closing?
+        profit = -1 * trades_bucket[trade.pair]
+        profit /= 100 if trade.mark > 9
+        h = {
+          "date": trade.created_at.to_time.to_i,
+          "profit": profit
+        }
+        date_with_profits << h
+        trades_bucket[trade.pair] = 0
+      end
+    end
+
+    date_with_profits.unshift(initial_trade)
+    closed_trades = {
+      "performance": date_with_profits
+    }
+  end
+
   def self.open_positions
     # group trades by pair, get most recent one
     all_trades = Trade.all.group(:id, :pair).order(created_at: :desc).where(status: 0)
