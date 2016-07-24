@@ -70,12 +70,14 @@ class Trade < ActiveRecord::Base
     date_with_profits = []
 
     initial_profit = 0
+    initial_balance = 1000
     initial_date = Trade.first.created_at.to_time.to_i
     initial_trade = {
       "date": initial_date,
       "profit": initial_profit
     }
 
+    settled_profits = 0
     trades.each do |trade|
       trades_bucket[trade.pair] += (trade.size * trade.mark.to_f)
       if trade.closing?
@@ -87,12 +89,18 @@ class Trade < ActiveRecord::Base
         }
         date_with_profits << h
         trades_bucket[trade.pair] = 0
+        settled_profits += profit
       end
     end
 
+    total_return = 100 * settled_profits/initial_balance.to_f
     date_with_profits.unshift(initial_trade)
     closed_trades = {
-      "performance": date_with_profits
+      "closed_trades": date_with_profits,
+      "initial_balance": initial_balance,
+      "inception_date": initial_date,
+      "settled_profits": settled_profits,
+      "total_return": total_return
     }
   end
 
