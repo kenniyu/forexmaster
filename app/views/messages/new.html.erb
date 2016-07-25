@@ -1,0 +1,7 @@
+<%= form_for @message do |f| %>
+<p><%= f.label :body %></p>
+<div class="text-area-wrapper">
+  <%= f.text_area :body, class: "custom-alert-text-area" %>
+</div>
+<%= f.submit "Push" %>
+<% end %>

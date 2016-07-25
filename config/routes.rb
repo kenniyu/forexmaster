@@ -9,14 +9,14 @@ Rails.application.routes.draw do
 
   get 'trades_history' => 'trades#history', as: :history
   get 'performance' => 'trades#performance', as: :performance
-  get 'new_custom_alert' => 'trades#new_custom_alert', as: :new_custom_alert
-  post 'post_custom_alert' => 'trades#post_custom_alert', as: :post_custom_alert
+
   resources :trades
 
   post 'register_token/:token' => 'push_token#register_token', as: :register_token
   post 'clear_badge_count/:token' => 'push_token#clear_badge_count', as: :clear_badge_count
 
   resources :admin
+  resources :messages
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
