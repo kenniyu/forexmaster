@@ -56,6 +56,7 @@ class Trade < ActiveRecord::Base
         pair: trade.pair,
         size: trade.size,
         mark: "%0.5f" % trade.mark.to_f,
+        status: Trade.statuses[trade.status],
         date: trade.created_at.to_time.to_i
       }
       puts current_trade
