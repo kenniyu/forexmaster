@@ -32,7 +32,7 @@ class TradesController < ApplicationController
     end
 
     @trade_hash = Trade.pnl(from_date, to_date)
-    
+
     respond_to do |format|
       format.html
       format.json { render json: @trade_hash }
@@ -62,8 +62,15 @@ class TradesController < ApplicationController
         push_token.badge += 1
         push_token.save
 
+        trade_alert = ""
+        if trade.closing?
+          trade_alert = "#{trade.pair} trade closed!"
+        else
+          trade_alert = "New trade opened for #{trade.pair}!"
+        end
+
         notification = Houston::Notification.new(device: push_token.token)
-        notification.alert = "New trade available!"
+        notification.alert = trade_alert
         notification.sound = "default"
         notification.badge = new_badge_count
         notification.content_available = true
