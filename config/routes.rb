@@ -3,12 +3,14 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'welcome#index'
 
   # Example of regular route:
 
   get 'trades_history' => 'trades#history', as: :history
   get 'performance' => 'trades#performance', as: :performance
+  get 'new_custom_alert' => 'trades#new_custom_alert', as: :new_custom_alert
+  post 'post_custom_alert' => 'trades#post_custom_alert', as: :post_custom_alert
   resources :trades
 
   post 'register_token/:token' => 'push_token#register_token', as: :register_token
