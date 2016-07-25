@@ -1,7 +1,7 @@
 require 'houston'
 
 class MessagesController < ApplicationController
-  before_filter :authenticate
+  before_filter :authenticate, except: [:index]
 
   def index
     @messages = Message.all
