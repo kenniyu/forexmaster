@@ -4,7 +4,16 @@ class MessagesController < ApplicationController
   before_filter :authenticate, except: [:index]
 
   def index
-    @messages = Message.all
+    messages = Message.all
+    @messages = []
+
+    messages.each do |message|
+      @messages << {
+        body: message.body,
+        date: message.created_at.to_time.to_i
+      }
+    end
+
     respond_to do |format|
       format.html
       format.json { render json: @messages }

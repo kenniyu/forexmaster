@@ -101,7 +101,7 @@ class Trade < ActiveRecord::Base
       "initial_balance": initial_balance,
       "inception_date": initial_date,
       "settled_profits": settled_profits,
-      "total_return": total_return
+      "total_return": total_return.round(2)
     }
   end
 
