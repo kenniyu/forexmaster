@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get 'trades_history' => 'trades#history', as: :history
   get 'performance' => 'trades#performance', as: :performance
+  get 'legal' => 'welcome#legal', as: :legal
 
   resources :trades
 
