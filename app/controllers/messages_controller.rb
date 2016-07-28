@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
   before_filter :authenticate, except: [:index]
 
   def index
-    messages = Message.all
+    messages = Message.all.order(created_at: :desc)
     @messages = []
 
     messages.each do |message|

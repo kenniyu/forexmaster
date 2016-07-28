@@ -71,7 +71,7 @@ class Trade < ActiveRecord::Base
     date_with_profits = []
 
     initial_profit = 0
-    initial_balance = 1000
+    initial_balance = 1500
     initial_date = Trade.first.created_at.to_time.to_i
     initial_trade = {
       "date": initial_date,
