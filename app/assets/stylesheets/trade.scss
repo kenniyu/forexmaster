@@ -12,7 +12,7 @@ body {
     }
   }
 
-  
+
 
   font-family: "HelveticaNeue-Light", Helvetica;
   font-size: 14px;
@@ -35,5 +35,13 @@ body {
         cursor: pointer;
       }
     }
+  }
+
+  .input-wrapper {
+    display: block;
+  }
+
+  input.inline {
+    display: inline-block;
   }
 }

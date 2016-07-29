@@ -56,6 +56,16 @@ class MessagesController < ApplicationController
       end
       flash[:notice] = "Messages sent"
 
+      if params[:push_to_twitter] == "1"
+        client = Twitter::REST::Client.new do |config|
+          config.consumer_key        = ENV["TWTR_CONSUMER_KEY"]
+          config.consumer_secret     = ENV["TWTR_CONSUMER_SECRET"]
+          config.access_token        = ENV["TWTR_ACCESS_TOKEN"]
+          config.access_token_secret = ENV["TWTR_ACCESS_SECRET"]
+        end
+        client.update(body)
+      end
+
       redirect_to root_path and return
     else
       redirect_to action: "new" and return

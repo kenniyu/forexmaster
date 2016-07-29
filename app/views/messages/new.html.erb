@@ -1,7 +1,12 @@
 <%= form_for @message do |f| %>
 <p><%= f.label :body %></p>
 <div class="text-area-wrapper">
-  <%= f.text_area :body, class: "custom-alert-text-area" %>
+  <div class="input-wrapper">
+    <%= f.text_area :body, class: "custom-alert-text-area" %>
+  </div>
+  <div class="input-wrapper">
+    <%= check_box_tag :push_to_twitter, "1", true, {class: "inline"} %> <%= f.label :push_to_twitter %>
+  </div>
 </div>
 <%= f.submit "Push" %>
 <% end %>

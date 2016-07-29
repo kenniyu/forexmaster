@@ -1,22 +1,9 @@
-<div class="admin-container">
-<table>
-  <thead>
-  <tr>
-    <td>Device ID</td>
-    <td>Badge Count</td>
-    <td>Last Active</td>
-    <td>Inception</td>
-  </tr>
-</thead>
+<p><%= link_to "New Trade", new_trade_path %></p>
+<p><%= link_to "Devices", admin_devices_path %></p>
+<p><%= link_to "Push Notification", new_message_path %></p>
+<p><%= link_to "Messages", admin_messages_path %></p>
+<p><%= link_to "Trades Dashboard", admin_trades_path %></p>
 
-  <% @push_tokens.each do |push_token| %>
-  <tr>
-    <td><%= push_token.token %></td>
-    <td><%= push_token.badge %></td>
-    <td><%= time_ago_in_words(push_token.updated_at) %> ago</td>
-    <td><%= time_ago_in_words(push_token.created_at) %> ago</td>
-  </tr>
-  <% end %>
+<br/>
 
-</table>
-</div>
+<p><%= link_to "Home", root_path %></p>

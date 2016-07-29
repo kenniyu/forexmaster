@@ -23,6 +23,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # gem 'rails-push-notifications', '~> 0.2.0'
 gem 'houston'
+gem 'twitter'
+gem 'gmail'
 
 gem "figaro"
 

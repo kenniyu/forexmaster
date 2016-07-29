@@ -7,6 +7,11 @@ Rails.application.routes.draw do
 
   # Example of regular route:
 
+  get 'admin' => 'admin#index', as: :admin_index
+  get 'admin/messages' => 'admin#messages', as: :admin_messages
+  get 'admin/trades' => 'admin#trades', as: :admin_trades
+  post 'admin/push' => 'admin#push', as: :admin_push
+  get 'admin/devices' => 'admin#devices', as: :admin_devices
   get 'trades_history' => 'trades#history', as: :history
   get 'performance' => 'trades#performance', as: :performance
   get 'legal' => 'welcome#legal', as: :legal
@@ -16,7 +21,6 @@ Rails.application.routes.draw do
   post 'register_token/:token' => 'push_token#register_token', as: :register_token
   post 'clear_badge_count/:token' => 'push_token#clear_badge_count', as: :clear_badge_count
 
-  resources :admin
   resources :messages
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

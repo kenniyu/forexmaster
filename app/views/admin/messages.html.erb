@@ -1,0 +1,20 @@
+<div class="admin-container">
+<table>
+  <thead>
+  <tr>
+    <td>Message ID</td>
+    <td>Body</td>
+    <td>Created At</td>
+  </tr>
+</thead>
+
+  <% @messages.each do |message| %>
+  <tr>
+    <td><%= message.id %></td>
+    <td><%= message.body %></td>
+    <td><%= time_ago_in_words(message.created_at) %> ago</td>
+  </tr>
+  <% end %>
+
+</table>
+</div>

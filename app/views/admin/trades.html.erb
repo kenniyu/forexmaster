@@ -1,0 +1,20 @@
+<div class="admin-container">
+<table>
+  <thead>
+  <tr>
+    <td>Trade Alert</td>
+    <td>App</td>
+    <td>Twitter</td>
+  </tr>
+</thead>
+
+  <% @trades.each do |trade| %>
+  <tr>
+    <td><%= trade %></td>
+    <td><%= link_to "Push", admin_push_path(push_target: "app", body: trade), method: :post %></td>
+    <td><%= link_to "Push", admin_push_path(push_target: "twitter", body: trade), method: :post %></td>
+  </tr>
+  <% end %>
+
+</table>
+</div>
