@@ -66,6 +66,8 @@ class AdminController < ApplicationController
 
   def trades
     @trades = []
+    puts ENV["GMAIL_USERNAME"]
+    
     gmail = Gmail.new(ENV["GMAIL_USERNAME"], ENV["GMAIL_PASSWORD"])
     tos_from = "alerts@thinkorswim.com"
     tos_mails = gmail.inbox.find(:from => tos_from).last(10)
