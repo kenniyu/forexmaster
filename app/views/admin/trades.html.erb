@@ -11,8 +11,8 @@
   <% @trades.each do |trade| %>
   <tr>
     <td><%= trade %></td>
-    <td><%= link_to "Push", admin_push_path(push_target: "app", body: trade), method: :post %></td>
-    <td><%= link_to "Push", admin_push_path(push_target: "twitter", body: trade), method: :post %></td>
+    <td><%= link_to "Push", admin_push_path(push_target: "app", body: trade), method: :post, remote: true %></td>
+    <td><%= link_to "Push", admin_push_path(push_target: "twitter", body: trade), method: :post, remote: true %></td>
   </tr>
   <% end %>
 

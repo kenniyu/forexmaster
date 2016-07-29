@@ -19,6 +19,8 @@ class AdminController < ApplicationController
     push_target = params[:push_target]
     body = params[:body]
 
+    @success = false
+
     if push_target == "app"
       apn = Houston::Client.development
       file = File.join(Rails.root, "pems/dev_push.pem")
@@ -48,6 +50,8 @@ class AdminController < ApplicationController
 
       # save the message
       @message = Message.create!(body: body)
+
+      @success = true
     elsif push_target == "twitter"
       client = Twitter::REST::Client.new do |config|
         config.consumer_key        = ENV["TWTR_CONSUMER_KEY"]
@@ -56,12 +60,10 @@ class AdminController < ApplicationController
         config.access_token_secret = ENV["TWTR_ACCESS_SECRET"]
       end
       client.update(body)
-      flash[:notice] = "Tweet sent"
+      @success = true
     else
       puts "Push target not defined."
     end
-
-    redirect_to root_path and return
   end
 
   def trades
