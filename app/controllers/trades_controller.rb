@@ -47,6 +47,12 @@ class TradesController < ApplicationController
     pair = params[:trade][:pair]
     trade = Trade.create_trade(pair, size, mark)
     if trade
+      size_str = "+#{size}" if size.to_i > 0
+      mark_str = "%0.5f" % mark.to_f
+      
+      body = "#{size_str} #{pair.upcase} @#{mark_str}"
+      message = Message.create!(body: body)
+
       apn = Houston::Client.development
       file = File.join(Rails.root, "pems/dev_push.pem")
       if Rails.env.production?
