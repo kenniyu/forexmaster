@@ -67,21 +67,20 @@ class AdminController < ApplicationController
   def trades
     @trades = []
     puts ENV["GMAIL_USERNAME"]
-    
-    gmail = Gmail.new(ENV["GMAIL_USERNAME"], ENV["GMAIL_PASSWORD"])
-    tos_from = "alerts@thinkorswim.com"
-    tos_mails = gmail.inbox.find(:from => tos_from).last(10)
-    tos_mails.each do |mail|
-      body = mail.body.raw_source
-      if body.include? "# @"
-        account_substr = body.slice(0..body.rindex(", ACCOUNT") - 1)
-        start_index = body.index("tIP ")
-        tip_substr = account_substr[start_index + 4..-1]
-        puts tip_substr
-        @trades << tip_substr
+
+    Gmail.new(ENV["GMAIL_USERNAME"], ENV["GMAIL_PASSWORD"]) do |gmail|
+      tos_from = "alerts@thinkorswim.com"
+      tos_mails = gmail.inbox.find(:from => tos_from).last(10)
+      tos_mails.each do |mail|
+        body = mail.body.raw_source
+        if body.include? "# @"
+          account_substr = body.slice(0..body.rindex(", ACCOUNT") - 1)
+          start_index = body.index("tIP ")
+          tip_substr = account_substr[start_index + 4..-1]
+          puts tip_substr
+          @trades << tip_substr
+        end
       end
     end
-
-    gmail.logout
   end
 end
