@@ -18,6 +18,7 @@ class AdminController < ApplicationController
   def push
     push_target = params[:push_target]
     body = params[:body]
+    body = body.gsub("#", "")
 
     @success = false
 
