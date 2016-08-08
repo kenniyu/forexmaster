@@ -8,7 +8,7 @@ class AdminController < ApplicationController
   end
 
   def devices
-    @push_tokens = PushToken.all
+    @push_tokens = PushToken.all.order(created_at: :desc)
   end
 
   def messages
