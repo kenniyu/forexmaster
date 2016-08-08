@@ -5,6 +5,8 @@
     <td>Message ID</td>
     <td>Body</td>
     <td>Created At</td>
+    <td>Push to Twitter</td>
+    <td>Push to ForexBot</td>
   </tr>
 </thead>
 
@@ -13,6 +15,8 @@
     <td><%= message.id %></td>
     <td><%= message.body %></td>
     <td><%= time_ago_in_words(message.created_at) %> ago</td>
+    <td><%= link_to "Push", admin_push_path(push_target: "twitter", body: message.body), method: :post, remote: true %></td>
+    <td><%= link_to "Push", admin_push_path(push_target: "app", body: message.body), method: :post, remote: true %></td>
   </tr>
   <% end %>
 
